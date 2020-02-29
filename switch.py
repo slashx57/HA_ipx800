@@ -84,6 +84,7 @@ class IPX800Switch(SwitchDevice):
     """Initialize an IPX800Switch."""
     self._obj = obj
     self._state = False
+    _LOGGER.debug(f"[switch.{obj.name}] added")
 
   @property
   def name(self):

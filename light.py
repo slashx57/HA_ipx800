@@ -39,11 +39,11 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
       if ipxdata.virt_analogs!=None and len(ipxdata.virt_analogs)>=r :
         virt_analogs.append(ipxdata.virt_analogs[r-1])
       else:
-        _LOGGER.warning(r)
-        _LOGGER.warning(ipxdata.virt_analogs)
         _LOGGER.warning("Requested virtual analog %i does not exists", r)
+
     # Add IPX800Light devices
-    add_devices(IPX800Light(virt_analog) for virt_analog in virt_analogs)
+    if (virt_analogs):
+      add_devices(IPX800Light(virt_analog) for virt_analog in virt_analogs)
 
 class IPX800Light(Light):
   """Representation of a virtual analog of IPX"""
@@ -53,6 +53,7 @@ class IPX800Light(Light):
     self._obj = obj
     self._brightness = None
     self._supported_features = SUPPORT_BRIGHTNESS
+    _LOGGER.debug(f"[light.{obj.name}] added")
 
   @property
   def name(self):

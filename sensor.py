@@ -18,12 +18,14 @@ _LOGGER = logging.getLogger(__name__)
 
 CONF_ENABLED_COUNTERS = 'enabled_counters'
 CONF_ENABLED_ANALOGS = 'enabled_analogs'
+CONF_ENABLED_VIRTANA = 'enabled_virtualanalogs'
 
 # Validation of the user's configuration
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
   {
     vol.Optional(CONF_ENABLED_COUNTERS): list,
     vol.Optional(CONF_ENABLED_ANALOGS): list,
+    vol.Optional(CONF_ENABLED_VIRTANA): list,
     vol.Optional(CONF_SCAN_INTERVAL, default=timedelta(seconds=5)): cv.time_period
   }
 )
@@ -35,6 +37,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
   # Assign configuration variables. 
   enabled_counters = config.get(CONF_ENABLED_COUNTERS)
   enabled_analogs = config.get(CONF_ENABLED_ANALOGS)
+  enabled_virtana = config.get(CONF_ENABLED_VIRTANA)
   scan_interval = config.get(CONF_SCAN_INTERVAL).total_seconds()
   device_class = config.get(CONF_DEVICE_CLASS)
 
@@ -70,6 +73,19 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     if (analogs):
       add_devices(IPX800Sensor(analog, device_class) for analog in analogs)
 
+  if enabled_virtana != None and len(enabled_virtana) > 0:
+    # Instanciate IPXVirtuals
+    virt_analogs = []
+    for r in enabled_virtana:
+      if ipxdata.virt_analogs!=None and len(ipxdata.virt_analogs)>=r :
+        virt_analogs.append(ipxdata.virt_analogs[r-1])
+      else:
+        _LOGGER.warning("Requested virtual analog %i does not exists", r)
+
+    # Add IPX800Sensor devices
+    if (virt_analogs):
+      add_devices(IPX800Sensor(virt_analog, device_class) for virt_analog in virt_analogs)
+
 
 class IPX800Sensor(Entity):
   """Representation of a sensor connected to IPX """
@@ -79,6 +95,7 @@ class IPX800Sensor(Entity):
     self._obj = obj
     self._device_class = device_class
     self._state = None
+    _LOGGER.debug(f"[sensor.{obj.name}] added")
     
   @property
   def name(self):
