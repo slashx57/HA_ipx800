@@ -89,7 +89,7 @@ class IPX800Switch(SwitchDevice):
   @property
   def name(self):
     """Return the display name of this switch."""
-    return self._obj.name
+    return "ipx800_" + self._obj.name
 
   @property
   def is_on(self):

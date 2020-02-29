@@ -100,7 +100,7 @@ class IPX800Sensor(Entity):
   @property
   def name(self):
     """Return the display name of this sensor."""
-    return self._obj.name
+    return "ipx800_" + self._obj.name
 
   @property
   def state(self):

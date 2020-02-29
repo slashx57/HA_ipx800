@@ -58,7 +58,7 @@ class IPX800Light(Light):
   @property
   def name(self):
     """Return the display name of this light."""
-    return self._obj.name
+    return "ipx800_" + self._obj.name
 
   @property
   def supported_features(self):
