@@ -5,13 +5,15 @@ Package Homeassistant pour contrôler le module IPX800v4 de GCE-Electronics
 
 Dans le fichier configuration.yaml :
 
+```yaml
 	ipx800:
-			host: 192.168.1.106
-			port: 80
-			api_key: apikey
+		host: 192.168.1.106
+		port: 80
+		api_key: apikey
+```
 
 Dans le fichier sensor.yaml :
-
+```yaml
 	- platform: ipx800
 	  enabled_counters:
 	  - 1 # comment
@@ -20,15 +22,15 @@ Dans le fichier sensor.yaml :
 	  - 1 
 	  enabled_virtualanalogs: 
 	  - 17 
-
+```
 Dans le fichier light.yaml :
-
+```yaml
 	- platform: ipx800
 	  enabled_virtualanalogs: 
 	  - 17
-
+```
 Dans le fichier switch.yaml :
-
+```yaml
 	- platform: ipx800
 	  enabled_relays: 
 	  - 1
@@ -38,9 +40,9 @@ Dans le fichier switch.yaml :
 	  - 2
 	  enabled_virtualoutputs: 
 	  - 1
+```
 
+## Information de licence
 
-## License Information
-
-[READ LICENSE FILE](LICENSE)
+[Lire la licence](LICENSE)
 
