@@ -1,9 +1,9 @@
-
+{
   "domain": "ipx800",
   "name": "ipx800",
   "documentation": "http://boiselet@free.fr",
   "dependencies": [],
   "codeowners": ["slashx57"],
-  "requirements": ["pyipx800>=0.0.3", "requests-xml>=0.2.3"]
+  "requirements": ["pyipx800>=0.0.3", "requests-xml>=0.2.3"],
+  "version": "0.1.0"
 }
-

@@ -9,7 +9,7 @@ from . import DOMAIN
 import voluptuous as vol
 
 # Import the device class from the component that you want to support
-from homeassistant.components.binary_sensor import DEVICE_CLASSES_SCHEMA, PLATFORM_SCHEMA, BinarySensorDevice
+from homeassistant.components.binary_sensor import DEVICE_CLASSES_SCHEMA, PLATFORM_SCHEMA, BinarySensorEntity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import Entity
 from homeassistant.const import CONF_SCAN_INTERVAL, CONF_DEVICE_CLASS
@@ -56,7 +56,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
 
 
-class IPX800BinarySensor(BinarySensorDevice):
+class IPX800BinarySensor(BinarySensorEntity):
   """Representation of a binary sensor as input of IPX """
 
   def __init__(self, obj, device_class):

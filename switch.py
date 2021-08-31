@@ -6,7 +6,7 @@ import voluptuous as vol
 from . import DOMAIN
 
 # Import the device class from the component that you want to support
-from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchDevice
+from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchEntity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import Entity
 
@@ -77,7 +77,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     # Add IPX800Switch devices
     add_devices(IPX800Switch(output) for output in virt_outputs)
 
-class IPX800Switch(SwitchDevice):
+class IPX800Switch(SwitchEntity):
   """Representation of a switch for IPX"""
 
   def __init__(self, obj):

@@ -6,7 +6,7 @@ import voluptuous as vol
 from . import DOMAIN
 
 # Import the device class from the component that you want to support
-from homeassistant.components.light import ATTR_BRIGHTNESS, SUPPORT_BRIGHTNESS, PLATFORM_SCHEMA, Light
+from homeassistant.components.light import ATTR_BRIGHTNESS, SUPPORT_BRIGHTNESS, PLATFORM_SCHEMA, LightEntity
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import Entity
 
@@ -45,7 +45,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     if (virt_analogs):
       add_devices(IPX800Light(virt_analog) for virt_analog in virt_analogs)
 
-class IPX800Light(Light):
+class IPX800Light(LightEntity):
   """Representation of a virtual analog of IPX"""
 
   def __init__(self, obj):
